@@ -1,3 +1,5 @@
+import 'package:client/post/home.dart';
+import 'package:client/post/post.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,10 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return MaterialApp(
-        home: Scaffold(
-          appBar: AppBar(),
-          body: Container(),
-        )
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const Home(),
+        '/post': (context) => const Post(),
+      },
     );
   }
 
