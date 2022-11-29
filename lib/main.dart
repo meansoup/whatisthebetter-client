@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const Home(),
-        '/post': (context) => const Post(),
+        '/post': (context) => const GetPost(),
       },
     );
   }
