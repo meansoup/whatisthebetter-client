@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
 
-class Post extends StatelessWidget {
-  const Post({Key? key}): super(key: key);
+import '../witb-client/getpost.dart';
+
+class GetPost extends StatefulWidget {
+  const GetPost({super.key});
+
+  @override
+  State<GetPost> createState() => PostState();
+}
+
+class PostState extends State<GetPost> {
+  late Future<Post> futurePost;
+
+  @override
+  void initState() {
+    super.initState();
+    futurePost = getPost("postId");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -9,9 +24,23 @@ class Post extends StatelessWidget {
     return MaterialApp(
         home: Scaffold(
           appBar: AppBar(
-            title: const Text('Post Example'),
+            title: const Text('GetPost Example'),
           ),
-          body: Container(),
+          body: Center(
+            child: FutureBuilder<Post>(
+              future: futurePost,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(snapshot.data!.id);
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                }
+
+                // By default, show a loading spinner.
+                return const CircularProgressIndicator();
+              },
+            ),
+          ),
         )
     );
   }
