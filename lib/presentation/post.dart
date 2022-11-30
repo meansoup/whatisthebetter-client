@@ -1,6 +1,7 @@
+import 'package:client/data/witb-server/getpost.dart';
+import 'package:client/domain/post.dart';
 import 'package:flutter/material.dart';
 
-import '../witb-client/getpost.dart';
 
 class GetPost extends StatefulWidget {
   const GetPost({super.key});

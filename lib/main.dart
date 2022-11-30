@@ -1,5 +1,5 @@
-import 'package:client/post/home.dart';
-import 'package:client/post/post.dart';
+import 'package:client/presentation/home.dart';
+import 'package:client/presentation/post.dart';
 import 'package:flutter/material.dart';
 
 void main() {
