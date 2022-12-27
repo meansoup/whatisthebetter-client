@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ContentFoot extends StatefulWidget {
-  const ContentFoot({super.key});
+  final String likeCnt;
+
+  const ContentFoot({ Key? key, required this.likeCnt }): super(key: key);
 
   @override
   State<ContentFoot> createState() => ContentFootState();
@@ -18,7 +20,7 @@ class ContentFootState extends State<ContentFoot> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _buildButtonColumn(color, Icons.favorite, '5091'),
+          _buildButtonColumn(color, Icons.favorite, widget.likeCnt),
           _buildButtonColumn(color, Icons.messenger_outline, 'comment'),
         ],
       )

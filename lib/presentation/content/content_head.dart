@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ContentHead extends StatefulWidget {
-  const ContentHead({super.key});
+  final String title;
+
+  const ContentHead({ Key? key, required this.title }): super(key: key);
 
   @override
   State<ContentHead> createState() => ContentHeadState();
@@ -16,7 +18,7 @@ class ContentHeadState extends State<ContentHead> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _buildTitleColumn("content1 title!!")
+          _buildTitleColumn(widget.title)
         ],
       )
     );

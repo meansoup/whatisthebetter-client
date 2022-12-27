@@ -1,27 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ContentBody extends StatefulWidget {
-  const ContentBody({super.key});
+  final String bodyText;
+
+  const ContentBody({ Key? key, required this.bodyText }): super(key: key);
 
   @override
   State<ContentBody> createState() => ContentBodyState();
 }
 
 class ContentBodyState extends State<ContentBody> {
-
-  var tempBody = """
-  Column _buildBodyColumn(String title) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Container(
-          child: Text(title)
-        )
-      ],
-    );
-  }
-  """;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +18,7 @@ class ContentBodyState extends State<ContentBody> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _buildBodyColumn(tempBody)
+          _buildBodyColumn(widget.bodyText)
         ],
       )
     );
