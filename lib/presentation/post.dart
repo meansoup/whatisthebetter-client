@@ -1,6 +1,8 @@
+import 'package:client/data/witb-server/getpost.dart';
+import 'package:client/domain/post.dart';
+import 'package:client/presentation/content/content.dart';
 import 'package:flutter/material.dart';
 
-import '../witb-client/getpost.dart';
 
 class GetPost extends StatefulWidget {
   const GetPost({super.key});
@@ -10,7 +12,7 @@ class GetPost extends StatefulWidget {
 }
 
 class PostState extends State<GetPost> {
-  late Future<Post> futurePost;
+  late Future<PostData> futurePost;
 
   @override
   void initState() {
@@ -27,11 +29,11 @@ class PostState extends State<GetPost> {
             title: const Text('GetPost Example'),
           ),
           body: Center(
-            child: FutureBuilder<Post>(
+            child: FutureBuilder<PostData>(
               future: futurePost,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Text(snapshot.data!.id);
+                  return Content(contentData: snapshot.data!.content1);
                 } else if (snapshot.hasError) {
                   return Text('${snapshot.error}');
                 }
