@@ -1,3 +1,4 @@
+import 'package:client/presentation/content_page.dart';
 import 'package:client/presentation/home.dart';
 import 'package:client/presentation/post.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const Home(),
         '/post': (context) => const GetPost(),
+        '/content': (context) => const ContentTempPage(),
       },
     );
   }
