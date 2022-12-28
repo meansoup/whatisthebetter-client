@@ -1,6 +1,5 @@
+import 'package:client/data/witb-server/likecontent.dart';
 import 'package:flutter/material.dart';
-
-import '../../data/witb-server/getpost.dart';
 
 class ContentLikeButton extends StatefulWidget {
   const ContentLikeButton({
@@ -32,6 +31,9 @@ class _ContentLikeButtonState extends State<ContentLikeButton> {
   void didUpdateWidget(ContentLikeButton oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.selected != oldWidget.selected) {
+      if (widget.selected) {
+        likeContent("postId", "contentId");
+      }
       statesController.update(MaterialState.selected, widget.selected);
     }
   }
@@ -70,34 +72,6 @@ class _ContentLikeButtonState extends State<ContentLikeButton> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class Home extends StatefulWidget {
-  const Home({super.key});
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  bool selected = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: ContentLikeButton(
-          selected: selected,
-          onPressed: () {
-            setState(() {
-              selected = !selected;
-            });
-          },
-          likeCnt: "123K",
-        ),
       ),
     );
   }
