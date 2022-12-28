@@ -20,18 +20,21 @@ class PostData {
   });
 
   factory PostData.fromJson(Map<String, dynamic> json) {
+    var postId = json['id'];
     return PostData(
-      id: json['id'],
+      id: postId,
       ownerUsername: json['ownerUsername'],
       title: json['title'],
       content1: ContentData(
-        id: json['content1Id'],
+        postId: postId,
+        contentId: json['content1Id'],
         title: json['content1Title'],
         text: json['content1Text'],
         likeCnt: json['content1LikeCnt'],
       ),
       content2: ContentData(
-        id: json['content2Id'],
+        postId: postId,
+        contentId: json['content2Id'],
         title: json['content2Title'],
         text: json['content2Text'],
         likeCnt: json['content2LikeCnt'],

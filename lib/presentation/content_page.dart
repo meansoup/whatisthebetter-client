@@ -36,7 +36,7 @@ class ContentTempPageState extends State<ContentTempPage> {
           ),
           body: ListView(
             children: [
-              Content(contentData: ContentData(id: 'content1 id', title: 'content1 title!!', text: tempBody, likeCnt: '5091'))
+              Content(contentData: ContentData(postId: 'postId', contentId: 'content1 id', title: 'content1 title!!', text: tempBody, likeCnt: '5091'))
             ],
           ),
         )

@@ -1,22 +1,15 @@
 class ContentData {
-  final String id;
+  final String postId;
+  final String contentId;
   final String title;
   final String text;
   final String likeCnt;
 
   const ContentData({
-    required this.id,
+    required this.postId,
+    required this.contentId,
     required this.title,
     required this.text,
     required this.likeCnt,
   });
-
-  factory ContentData.fromJson(Map<String, dynamic> json) {
-    return ContentData(
-      id: json['id'],
-      title: json['title'],
-      text: json['text'],
-      likeCnt: json['likeCnt'],
-    );
-  }
 }

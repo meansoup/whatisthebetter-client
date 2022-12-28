@@ -6,11 +6,15 @@ class ContentLikeButton extends StatefulWidget {
     super.key,
     required this.selected,
     required this.onPressed,
+    required this.postId,
+    required this.contentId,
     required this.likeCnt
   });
 
   final bool selected;
   final VoidCallback? onPressed;
+  final String postId;
+  final String contentId;
   final String likeCnt;
 
   @override
@@ -32,7 +36,7 @@ class _ContentLikeButtonState extends State<ContentLikeButton> {
     super.didUpdateWidget(oldWidget);
     if (widget.selected != oldWidget.selected) {
       if (widget.selected) {
-        likeContent("postId", "contentId");
+        likeContent(widget.postId, widget.contentId);
       }
       statesController.update(MaterialState.selected, widget.selected);
     }
