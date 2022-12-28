@@ -1,15 +1,26 @@
+import 'package:client/presentation/content/content_like_button.dart';
 import 'package:flutter/material.dart';
 
 class ContentFoot extends StatefulWidget {
+  final String postId;
+  final String contentId;
   final String likeCnt;
+  final bool liked;
 
-  const ContentFoot({ Key? key, required this.likeCnt }): super(key: key);
+  const ContentFoot({
+    Key? key,
+    required this.postId,
+    required this.contentId,
+    required this.likeCnt,
+    required this.liked
+  }): super(key: key);
 
   @override
   State<ContentFoot> createState() => ContentFootState();
 }
 
 class ContentFootState extends State<ContentFoot> {
+  bool selected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +31,17 @@ class ContentFootState extends State<ContentFoot> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _buildButtonColumn(color, Icons.favorite, widget.likeCnt),
+          ContentLikeButton(
+            selected: selected,
+            onPressed: () {
+              setState(() {
+                selected = !selected;
+              });
+            },
+            postId: widget.postId,
+            contentId: widget.contentId,
+            likeCnt: widget.likeCnt,
+          ),
           _buildButtonColumn(color, Icons.messenger_outline, 'comment'),
         ],
       )
