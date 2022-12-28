@@ -26,7 +26,7 @@ class ContentState extends State<Content> {
           children: [
             ContentHead(title: widget.contentData.title),
             ContentBody(bodyText: widget.contentData.text),
-            ContentFoot(likeCnt: widget.contentData.likeCnt)
+            ContentFoot(likeCnt: widget.contentData.likeCnt, liked: false)
           ],
         )
     );
