@@ -33,7 +33,28 @@ class PostState extends State<GetPost> {
               future: futurePost,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Content(contentData: snapshot.data!.content1);
+                  return SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Column(
+                          children: <Widget>[
+                            Container(
+                              height: 1000,
+                              width: 700,
+                              color: Colors.black12,
+                              child: Content(contentData: snapshot.data!.content1)
+                            ),
+                            Container(
+                              height: 50,
+                            ),
+                            Container(
+                                height: 1000,
+                                width: 700,
+                                color: Colors.black12,
+                                child: Content(contentData: snapshot.data!.content2)
+                            ),
+                          ]
+                      )
+                  );
                 } else if (snapshot.hasError) {
                   return Text('${snapshot.error}');
                 }
