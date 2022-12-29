@@ -5,7 +5,12 @@ import 'package:flutter/material.dart';
 
 
 class GetPost extends StatefulWidget {
-  const GetPost({super.key});
+  final String postId;
+
+  const GetPost({
+    super.key,
+    required this.postId,
+  });
 
   @override
   State<GetPost> createState() => PostState();
@@ -17,7 +22,7 @@ class PostState extends State<GetPost> {
   @override
   void initState() {
     super.initState();
-    futurePost = getPost("postId");
+    futurePost = getPost(widget.postId);
   }
 
   @override

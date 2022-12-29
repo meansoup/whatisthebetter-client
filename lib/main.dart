@@ -19,11 +19,21 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const Home(),
-        '/post': (context) => const GetPost(),
         '/content': (context) => const ContentTempPage(),
         '/post/create': (context) => const CreatePost(),
         '/join': (context) => const Join(),
       },
+      onGenerateRoute: (settings) {
+        if (settings.name!.startsWith('/post')) {
+          List<String> tokens = settings.name!.split('/post/');
+          var postId = tokens.elementAt(1);
+          return MaterialPageRoute(
+            builder: (context) {
+              return GetPost(postId: postId,);
+            }
+          );
+        }
+      }
     );
   }
 
