@@ -1,4 +1,5 @@
 import 'package:client/presentation/content_page.dart';
+import 'package:client/presentation/createpost.dart';
 import 'package:client/presentation/home.dart';
 import 'package:client/presentation/join.dart';
 import 'package:client/presentation/post.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const Home(),
         '/post': (context) => const GetPost(),
         '/content': (context) => const ContentTempPage(),
+        '/post/create': (context) => const CreatePost(),
         '/join': (context) => const Join(),
       },
     );
