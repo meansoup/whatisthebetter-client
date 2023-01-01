@@ -1,7 +1,6 @@
 import 'package:client/presentation/content_page.dart';
 import 'package:client/presentation/createpost.dart';
 import 'package:client/presentation/home.dart';
-import 'package:client/presentation/join.dart';
 import 'package:client/presentation/post.dart';
 import 'package:client/presentation/sign_google.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +21,6 @@ class MyApp extends StatelessWidget {
         '/': (context) => const Home(),
         '/content': (context) => const ContentTempPage(),
         '/post/create': (context) => const CreatePost(),
-        '/join': (context) => const Join(),
         '/login': (contenxt) => const SignGoogle(),
       },
       onGenerateRoute: (settings) {
