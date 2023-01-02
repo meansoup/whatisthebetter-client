@@ -1,6 +1,7 @@
-import 'package:client/data/sign/google.dart';
-import 'package:client/data/witb-server/login.dart';
+import 'package:client/backend/sign/google.dart';
+import 'package:client/service/login.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignGoogle extends StatefulWidget {
   const SignGoogle({Key? key}) : super(key: key);
@@ -10,23 +11,21 @@ class SignGoogle extends StatefulWidget {
 }
 
 class _SignGoogleState extends State<SignGoogle> {
-  String idToken = "";
+  String witbToken = "";
 
   void signInWithGoogle() async {
-    await signInGoogle().then((value) => {
-      setState(() {
-        idToken = value;
-      })
-    });
+    await loginIfNotLoggedIn();
 
-    print("google id token: $idToken");
-    login(LoginRequest(idToken: idToken, social: "GOOGLE"));
+    final prefs = await SharedPreferences.getInstance();
+    witbToken = prefs.getString('witbToken') ?? "";
+
+    print("witb token: $witbToken");
   }
 
   void signOut() async {
-    if (idToken.isNotEmpty) {
+    if (witbToken.isNotEmpty) {
       signOutGoogle();
-      idToken = "";
+      witbToken = "";
     }
   }
 
@@ -34,7 +33,7 @@ class _SignGoogleState extends State<SignGoogle> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child: idToken.isNotEmpty? _logoutButton():
+          child: witbToken.isNotEmpty? _logoutButton():
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

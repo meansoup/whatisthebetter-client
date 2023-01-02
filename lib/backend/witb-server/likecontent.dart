@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:client/domain/post.dart';
 import 'package:http/http.dart' as http;
 
 Future<bool> likeContent(String postId, String contentId) async {

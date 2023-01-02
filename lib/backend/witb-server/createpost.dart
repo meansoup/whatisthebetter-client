@@ -1,18 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:client/domain/post.dart';
 import 'package:http/http.dart' as http;
 
-Future<bool> createPost(CreatePostDto createPostDto) async {
+Future<bool> createPost(String witbToken, CreatePostDto createPostDto) async {
   var requestBody = jsonEncode(createPostDto);
   print(requestBody);
 
   final response = await http.post(
     Uri.parse('https://06g3yu62c2.execute-api.ap-northeast-2.amazonaws.com/v1/post'),
     headers: {
-      // TODO: uid 고정 해제하기
-      'uid': 'fd35e3e5-01d3-4d26-ae23-c86622bfe34c',
+      'witbToken': witbToken,
       "content-type" : "application/json",
       "accept" : "application/json",
     },

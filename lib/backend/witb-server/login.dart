@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-Future<bool> login(LoginRequest loginRequest) async {
+Future<String> login(LoginRequest loginRequest) async {
   var requestBody = jsonEncode(loginRequest);
   print(requestBody);
 
@@ -19,11 +19,10 @@ Future<bool> login(LoginRequest loginRequest) async {
   if (response.statusCode == 200) {
     var loginResponse = LoginResponse.fromJson(jsonDecode(response.body));
     print('witbToken = ${loginResponse.witbToken}');
-    return true;
-  } else {
-    print('login error');
-    return false;
+    return loginResponse.witbToken;
   }
+  print('login error');
+  return "";
 }
 
 class LoginRequest {

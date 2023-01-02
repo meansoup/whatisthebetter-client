@@ -1,4 +1,4 @@
-import 'package:client/data/witb-server/likecontent.dart';
+import 'package:client/backend/witb-server/likecontent.dart';
 import 'package:flutter/material.dart';
 
 class ContentLikeButton extends StatefulWidget {

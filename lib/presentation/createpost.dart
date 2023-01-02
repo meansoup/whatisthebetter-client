@@ -1,4 +1,4 @@
-import 'package:client/data/witb-server/createpost.dart';
+import 'package:client/service/post.dart';
 import 'package:flutter/material.dart';
 
 
@@ -99,17 +99,13 @@ class CreatePostState extends State<CreatePost> {
                           color: Colors.blue, borderRadius: BorderRadius.circular(20)),
                       child: TextButton(
                         onPressed: () {
-                          createPost(CreatePostDto(
-                              title: titleController.text,
-                              content1: CreatePostContentDto(
-                                  title: content1TitleController.text,
-                                  text: content1TextController.text,
-                              ),
-                              content2: CreatePostContentDto(
-                                  title: content2TitleController.text,
-                                  text: content2TextController.text
-                              )
-                          ));
+                          createPostWithCheckLogin(
+                            titleController.text,
+                            content1TitleController.text,
+                            content1TextController.text,
+                            content2TitleController.text,
+                            content2TextController.text,
+                          );
                         },
                         child: Text(
                           'create post',
