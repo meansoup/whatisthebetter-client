@@ -1,5 +1,5 @@
-import 'package:client/data/sign/google.dart';
-import 'package:client/data/witb-server/login.dart';
+import 'package:client/backend/sign/google.dart';
+import 'package:client/backend/witb-server/login.dart';
 import 'package:flutter/material.dart';
 
 class SignGoogle extends StatefulWidget {

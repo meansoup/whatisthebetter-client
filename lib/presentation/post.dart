@@ -1,4 +1,4 @@
-import 'package:client/data/witb-server/getpost.dart';
+import 'package:client/backend/witb-server/getpost.dart';
 import 'package:client/domain/post.dart';
 import 'package:client/presentation/content/content.dart';
 import 'package:flutter/material.dart';
