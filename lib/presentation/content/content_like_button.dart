@@ -1,4 +1,4 @@
-import 'package:client/backend/witb-server/likecontent.dart';
+import 'package:client/service/post.dart';
 import 'package:flutter/material.dart';
 
 class ContentLikeButton extends StatefulWidget {
@@ -36,7 +36,7 @@ class _ContentLikeButtonState extends State<ContentLikeButton> {
     super.didUpdateWidget(oldWidget);
     if (widget.selected != oldWidget.selected) {
       if (widget.selected) {
-        likeContent(widget.postId, widget.contentId);
+        likeContentWithCheckLogin(widget.postId, widget.contentId);
       }
       statesController.update(MaterialState.selected, widget.selected);
     }

@@ -1,4 +1,5 @@
 import 'package:client/backend/witb-server/createpost.dart';
+import 'package:client/backend/witb-server/likecontent.dart';
 import 'package:client/service/login.dart';
 
 Future<void> createPostWithCheckLogin(
@@ -22,4 +23,9 @@ Future<void> createPostWithCheckLogin(
       )
     )
   );
+}
+
+Future<void> likeContentWithCheckLogin(String postId, String contentId) async {
+  var witbToken = await loginIfNotLoggedIn();
+  likeContent(witbToken, postId, contentId);
 }
