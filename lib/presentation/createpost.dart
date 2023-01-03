@@ -99,7 +99,7 @@ class CreatePostState extends State<CreatePost> {
                           color: Colors.blue, borderRadius: BorderRadius.circular(20)),
                       child: TextButton(
                         onPressed: () {
-                          createPostWithCheckLogin(
+                          var postId = createPostWithCheckLogin(
                             titleController.text,
                             content1TitleController.text,
                             content1TextController.text,
