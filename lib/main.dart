@@ -1,5 +1,5 @@
 import 'package:client/presentation/content_page.dart';
-import 'package:client/presentation/createpost.dart';
+import 'package:client/presentation/create_post/createpost.dart';
 import 'package:client/presentation/home.dart';
 import 'package:client/presentation/post.dart';
 import 'package:client/presentation/sign_google.dart';
