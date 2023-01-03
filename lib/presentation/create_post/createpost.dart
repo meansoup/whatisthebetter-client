@@ -1,3 +1,4 @@
+import 'package:client/presentation/post.dart';
 import 'package:client/service/post.dart';
 import 'package:flutter/material.dart';
 
@@ -99,13 +100,19 @@ class CreatePostState extends State<CreatePost> {
                           color: Colors.blue, borderRadius: BorderRadius.circular(20)),
                       child: TextButton(
                         onPressed: () {
-                          var postId = createPostWithCheckLogin(
+                          createPostWithCheckLogin(
                             titleController.text,
                             content1TitleController.text,
                             content1TextController.text,
                             content2TitleController.text,
                             content2TextController.text,
-                          );
+                          ).then((postId) {
+                            print('created post Id: $postId');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => GetPost(postId: postId,)),
+                            );
+                          });
                         },
                         child: Text(
                           'create post',
