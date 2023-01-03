@@ -18,3 +18,8 @@ Future<String> loginIfNotLoggedIn() async {
   prefs.setString('witbToken', witbToken);
   return witbToken;
 }
+
+Future<String> getTokenIfLoggedIn() async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getString('witbToken') ?? "";
+}
