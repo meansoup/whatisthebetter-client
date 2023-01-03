@@ -1,5 +1,7 @@
 import 'package:client/backend/witb-server/createpost.dart';
+import 'package:client/backend/witb-server/getpost.dart';
 import 'package:client/backend/witb-server/likecontent.dart';
+import 'package:client/domain/post.dart';
 import 'package:client/service/login.dart';
 
 Future<String> createPostWithCheckLogin(
@@ -25,6 +27,12 @@ Future<String> createPostWithCheckLogin(
   );
 
   return postId;
+}
+
+Future<PostData> getPostWithTokenIfLoggedIn(String postId) async {
+  var witbToken = await getTokenIfLoggedIn();
+
+  return await getPost(witbToken, postId);
 }
 
 Future<void> likeContentWithCheckLogin(String postId, String contentId) async {
