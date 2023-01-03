@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-Future<bool> createPost(String witbToken, CreatePostDto createPostDto) async {
-  var requestBody = jsonEncode(createPostDto);
+Future<String> createPost(String witbToken, CreatePostRequest createPostRequest) async {
+  var requestBody = jsonEncode(createPostRequest);
   print(requestBody);
 
   final response = await http.post(
@@ -14,26 +14,27 @@ Future<bool> createPost(String witbToken, CreatePostDto createPostDto) async {
       "content-type" : "application/json",
       "accept" : "application/json",
     },
-    body: jsonEncode(createPostDto),
+    body: jsonEncode(createPostRequest),
 
   );
 
   print(response.statusCode);
   print(response.body);
 
-  if (response.statusCode == 200) {
-    return true;
+  if (response.statusCode == 201) {
+    var createPostResponse = CreatePostResponse.fromJson(jsonDecode(response.body));
+    return createPostResponse.postId;
   } else {
-    return false;
+    return "";
   }
 }
 
-class CreatePostDto {
+class CreatePostRequest {
   final String title;
-  final CreatePostContentDto content1;
-  final CreatePostContentDto content2;
+  final CreatePostContentRequest content1;
+  final CreatePostContentRequest content2;
 
-  const CreatePostDto({
+  const CreatePostRequest({
     required this.title,
     required this.content1,
     required this.content2,
@@ -48,11 +49,11 @@ class CreatePostDto {
   }
 }
 
-class CreatePostContentDto {
+class CreatePostContentRequest {
   final String title;
   final String text;
 
-  const CreatePostContentDto({
+  const CreatePostContentRequest({
     required this.title,
     required this.text,
   });
@@ -62,5 +63,19 @@ class CreatePostContentDto {
       'title': title,
       'description': text,
     };
+  }
+}
+
+class CreatePostResponse {
+  final String postId;
+  final String title;
+
+  const CreatePostResponse({
+    required this.postId,
+    required this.title,
+  });
+
+  factory CreatePostResponse.fromJson(Map<String, dynamic> json) {
+    return CreatePostResponse(postId: json['postId'], title: json['title']);
   }
 }
