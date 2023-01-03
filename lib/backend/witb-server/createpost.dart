@@ -21,7 +21,7 @@ Future<String> createPost(String witbToken, CreatePostRequest createPostRequest)
   print(response.statusCode);
   print(response.body);
 
-  if (response.statusCode == 200) {
+  if (response.statusCode == 201) {
     var createPostResponse = CreatePostResponse.fromJson(jsonDecode(response.body));
     return createPostResponse.postId;
   } else {
