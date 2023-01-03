@@ -11,13 +11,13 @@ Future<void> createPostWithCheckLogin(
 
   createPost(
     witbToken,
-    CreatePostDto(
+    CreatePostRequest(
       title: postTitle,
-      content1: CreatePostContentDto(
+      content1: CreatePostContentRequest(
         title: content1Title,
         text: content1Text,
       ),
-      content2: CreatePostContentDto(
+      content2: CreatePostContentRequest(
         title: content2Title,
         text: content2Text
       )
