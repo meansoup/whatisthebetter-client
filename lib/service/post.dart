@@ -35,7 +35,7 @@ Future<PostData> getPostWithTokenIfLoggedIn(String postId) async {
   return await getPost(witbToken, postId);
 }
 
-Future<void> likeContentWithCheckLogin(String postId, String contentId) async {
+Future<bool> likeContentWithCheckLogin(String postId, String contentId) async {
   var witbToken = await loginIfNotLoggedIn();
-  likeContent(witbToken, postId, contentId);
+  return likeContent(witbToken, postId, contentId);
 }
