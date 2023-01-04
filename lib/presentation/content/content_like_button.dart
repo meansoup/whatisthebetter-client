@@ -36,9 +36,14 @@ class _ContentLikeButtonState extends State<ContentLikeButton> {
     super.didUpdateWidget(oldWidget);
     if (widget.selected != oldWidget.selected) {
       if (widget.selected) {
-        likeContentWithCheckLogin(widget.postId, widget.contentId);
+        likeContentWithCheckLogin(widget.postId, widget.contentId).then((success) => {
+          if (success) {
+            statesController.update(MaterialState.selected, widget.selected)
+          } else {
+            statesController.update(MaterialState.selected, false)
+          }
+        });
       }
-      statesController.update(MaterialState.selected, widget.selected);
     }
   }
 
