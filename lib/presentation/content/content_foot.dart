@@ -23,6 +23,12 @@ class ContentFootState extends State<ContentFoot> {
   bool selected = false;
 
   @override
+  void initState() {
+    super.initState();
+    selected = widget.liked;
+  }
+
+  @override
   Widget build(BuildContext context) {
     Color color = Theme.of(context).primaryColor;
 
