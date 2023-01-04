@@ -4,6 +4,7 @@ class ContentData {
   final String title;
   final String text;
   final String likeCnt;
+  final bool liked;
 
   const ContentData({
     required this.postId,
@@ -11,5 +12,6 @@ class ContentData {
     required this.title,
     required this.text,
     required this.likeCnt,
+    required this.liked,
   });
 }

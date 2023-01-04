@@ -30,7 +30,7 @@ class ContentState extends State<Content> {
                 postId: widget.contentData.postId,
                 contentId: widget.contentData.contentId,
                 likeCnt: widget.contentData.likeCnt,
-                liked: false
+                liked: widget.contentData.liked
             )
           ],
         )

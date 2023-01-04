@@ -88,6 +88,7 @@ class GetPostResponse {
         title: content1.title,
         text: content1.text,
         likeCnt: content1.likeCnt,
+        liked: likedContentId == content1.contentId,
       ),
       content2: ContentData(
         postId: id,
@@ -95,6 +96,7 @@ class GetPostResponse {
         title: content2.title,
         text: content2.text,
         likeCnt: content2.likeCnt,
+        liked: likedContentId == content2.contentId,
       ),
       createdAt: createdAt,
       modifiedAt: modifiedAt,
