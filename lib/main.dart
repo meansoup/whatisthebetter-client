@@ -1,4 +1,3 @@
-import 'package:client/presentation/content_page.dart';
 import 'package:client/presentation/create_post/createpost.dart';
 import 'package:client/presentation/home.dart';
 import 'package:client/presentation/post.dart';
@@ -19,7 +18,6 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const Home(),
-        '/content': (context) => const ContentTempPage(),
         '/post/create': (context) => const CreatePost(),
         '/login': (contenxt) => const SignGoogle(),
       },

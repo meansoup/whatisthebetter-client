@@ -1,6 +1,6 @@
-import 'package:client/backend/witb-server/getpost.dart';
 import 'package:client/domain/post.dart';
 import 'package:client/presentation/content/content.dart';
+import 'package:client/service/post.dart';
 import 'package:flutter/material.dart';
 
 
@@ -22,7 +22,7 @@ class PostState extends State<GetPost> {
   @override
   void initState() {
     super.initState();
-    futurePost = getPost(widget.postId);
+    futurePost = getPostWithTokenIfLoggedIn(widget.postId);
   }
 
   @override
