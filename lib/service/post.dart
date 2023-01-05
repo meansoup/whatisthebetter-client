@@ -1,3 +1,4 @@
+import 'package:client/backend/witb-server/cancellikecontent.dart';
 import 'package:client/backend/witb-server/createpost.dart';
 import 'package:client/backend/witb-server/getpost.dart';
 import 'package:client/backend/witb-server/likecontent.dart';
@@ -38,4 +39,9 @@ Future<PostData> getPostWithTokenIfLoggedIn(String postId) async {
 Future<bool> likeContentWithCheckLogin(String postId, String contentId) async {
   var witbToken = await loginIfNotLoggedIn();
   return likeContent(witbToken, postId, contentId);
+}
+
+Future<bool> cancelLikeContentWithCheckLogin(String postId, String contentId) async {
+  var witbToken = await loginIfNotLoggedIn();
+  return cancelLikeContent(witbToken, postId, contentId);
 }
