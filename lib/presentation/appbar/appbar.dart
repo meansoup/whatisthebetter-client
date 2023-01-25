@@ -1,3 +1,4 @@
+import 'package:client/presentation/create_post/createpost.dart';
 import 'package:client/presentation/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,9 @@ class _WitbAppBarState extends State<WitbAppbar> {
       actions: [
         IconButton(
             icon: Icon(Icons.create),
-            onPressed: () => {print("plus")}
+            onPressed: () => {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const CreatePost()))
+            }
         ),
         IconButton(
             icon: Icon(Icons.account_circle),
