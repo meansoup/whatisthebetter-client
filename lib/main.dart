@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
           List<String> tokens = settings.name!.split('/post/');
           var postId = tokens.elementAt(1);
           return MaterialPageRoute(
+            settings: settings,
             builder: (context) {
               return GetPost(postId: postId,);
             }

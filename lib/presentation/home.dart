@@ -1,3 +1,4 @@
+import 'package:client/presentation/appbar/appbar.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -8,9 +9,7 @@ class Home extends StatelessWidget {
 
     return MaterialApp(
         home: Scaffold(
-          appBar: AppBar(
-            title: const Text('another Example'),
-          ),
+          appBar: WitbAppbar(),
           body: Container(),
         )
     );
