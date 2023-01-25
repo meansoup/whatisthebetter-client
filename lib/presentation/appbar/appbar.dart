@@ -1,3 +1,4 @@
+import 'package:client/presentation/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,9 @@ class _WitbAppBarState extends State<WitbAppbar> {
   Widget build(BuildContext context) {
     return AppBar(
       title: GestureDetector(
-          onTap: () => { print("go to home") },
+          onTap: () => {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()))
+          },
           child: Text("WhatIsTheBetter"),
       ),
       // leading:
