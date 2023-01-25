@@ -1,4 +1,5 @@
 import 'package:client/domain/post.dart';
+import 'package:client/presentation/appbar/appbar.dart';
 import 'package:client/presentation/content/content.dart';
 import 'package:client/service/post.dart';
 import 'package:flutter/material.dart';
@@ -30,9 +31,7 @@ class PostState extends State<GetPost> {
 
     return MaterialApp(
         home: Scaffold(
-          appBar: AppBar(
-            title: const Text('GetPost Example'),
-          ),
+          appBar: WitbAppbar(),
           body: Center(
             child: FutureBuilder<PostData>(
               future: futurePost,
