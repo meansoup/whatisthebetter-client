@@ -17,7 +17,23 @@ class _WitbAppBarState extends State<WitbAppbar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text('GetPost Example'),
+      title: GestureDetector(
+          onTap: () => { print("go to home") },
+          child: Text("WhatIsTheBetter"),
+      ),
+      // leading:
+      // IconButton(icon: Icon(Icons.menu), onPressed: ()=> {print("menu")}),
+      actions: [
+        IconButton(
+            icon: Icon(Icons.create),
+            onPressed: () => {print("plus")}
+        ),
+        IconButton(
+            icon: Icon(Icons.account_circle),
+            onPressed: () => {print("account info")}
+        ),
+      ],
+      backgroundColor: Colors.transparent,
     );
   }
 
