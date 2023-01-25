@@ -1,3 +1,4 @@
+import 'package:client/presentation/appbar/appbar.dart';
 import 'package:client/presentation/post.dart';
 import 'package:client/service/post.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +24,7 @@ class CreatePostState extends State<CreatePost> {
 
     return MaterialApp(
         home: Scaffold(
-          appBar: AppBar(
-            title: const Text('CreatePost Example'),
-          ),
+          appBar: WitbAppbar(),
           body: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
