@@ -1,5 +1,6 @@
-import 'package:client/presentation/content/content_like_button.dart';
 import 'package:flutter/material.dart';
+
+import 'content_like_button.dart';
 
 class ContentFoot extends StatefulWidget {
   final String postId;

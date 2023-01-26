@@ -1,7 +1,8 @@
-import 'package:client/presentation/appbar/appbar.dart';
-import 'package:client/presentation/post.dart';
+import 'package:client/presentation/widget/appbar/appbar.dart';
 import 'package:client/service/post.dart';
 import 'package:flutter/material.dart';
+
+import 'getpost.dart';
 
 
 class CreatePost extends StatefulWidget {

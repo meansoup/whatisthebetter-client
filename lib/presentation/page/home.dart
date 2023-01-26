@@ -1,4 +1,4 @@
-import 'package:client/presentation/appbar/appbar.dart';
+import 'package:client/presentation/widget/appbar/appbar.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
