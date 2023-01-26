@@ -1,8 +1,8 @@
 import 'package:client/domain/content.dart';
-import 'package:client/presentation/content/content_body.dart';
-import 'package:client/presentation/content/content_foot.dart';
 import 'package:flutter/material.dart';
 
+import 'content_body.dart';
+import 'content_foot.dart';
 import 'content_head.dart';
 
 class Content extends StatefulWidget {

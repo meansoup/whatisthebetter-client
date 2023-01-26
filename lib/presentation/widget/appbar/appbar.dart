@@ -1,5 +1,5 @@
-import 'package:client/presentation/create_post/createpost.dart';
-import 'package:client/presentation/home.dart';
+import 'package:client/presentation/page/home.dart';
+import 'package:client/presentation/page/post/createpost.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

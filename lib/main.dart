@@ -1,7 +1,7 @@
-import 'package:client/presentation/create_post/createpost.dart';
-import 'package:client/presentation/home.dart';
-import 'package:client/presentation/post.dart';
-import 'package:client/presentation/sign_google.dart';
+import 'package:client/presentation/page/home.dart';
+import 'package:client/presentation/page/post/createpost.dart';
+import 'package:client/presentation/page/post/getpost.dart';
+import 'package:client/presentation/page/sign_google.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       initialRoute: '/',
       routes: {
