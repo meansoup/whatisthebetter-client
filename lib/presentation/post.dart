@@ -2,6 +2,7 @@ import 'package:client/domain/post.dart';
 import 'package:client/presentation/appbar/appbar.dart';
 import 'package:client/presentation/content/content.dart';
 import 'package:client/service/post.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 
@@ -34,6 +35,7 @@ class PostState extends State<GetPost> {
   Widget build(BuildContext context) {
 
     return MaterialApp(
+        scrollBehavior: AppScrollBehavior(),
         home: Scaffold(
           appBar: WitbAppbar(),
           body: Center(
@@ -64,5 +66,12 @@ class PostState extends State<GetPost> {
         )
     );
   }
+}
 
+class AppScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+    PointerDeviceKind.touch,
+    PointerDeviceKind.mouse,
+  };
 }
