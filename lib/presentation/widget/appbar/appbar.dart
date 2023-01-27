@@ -39,7 +39,6 @@ class _WitbAppBarState extends State<WitbAppbar> {
             onPressed: () => {print("account info")}
         ),
       ],
-      backgroundColor: Colors.transparent,
     );
   }
 

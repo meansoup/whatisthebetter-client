@@ -1,10 +1,10 @@
+import 'package:client/config/theme.dart';
 import 'package:client/domain/post.dart';
 import 'package:client/presentation/widget/appbar/appbar.dart';
 import 'package:client/presentation/widget/content/content.dart';
 import 'package:client/service/post.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
 
 class GetPost extends StatefulWidget {
   final String postId;
@@ -35,6 +35,8 @@ class PostState extends State<GetPost> {
   Widget build(BuildContext context) {
 
     return MaterialApp(
+      theme: mainTheme,
+      darkTheme: mainDarkTheme,
       scrollBehavior: AppScrollBehavior(),
       home: Scaffold(
         appBar: WitbAppbar(),
