@@ -8,7 +8,7 @@ Future<CreateCommentResponse> createComment(String witbToken, CreateCommentReque
   print(requestBody);
 
   final response = await http.post(
-    Uri.parse('https://06g3yu62c2.execute-api.ap-northeast-2.amazonaws.com/v1/post'),
+    Uri.parse('https://06g3yu62c2.execute-api.ap-northeast-2.amazonaws.com/v1/comment'),
     headers: {
       'witbToken': witbToken,
       "content-type" : "application/json",
