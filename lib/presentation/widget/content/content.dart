@@ -20,20 +20,30 @@ class ContentState extends State<Content> {
   Widget build(BuildContext context) {
 
     return Container(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ContentHead(title: widget.contentData.title),
-            ContentBody(bodyText: widget.contentData.text),
-            ContentFoot(
-                postId: widget.contentData.postId,
-                contentId: widget.contentData.contentId,
-                likeCnt: widget.contentData.likeCnt,
-                liked: widget.contentData.liked
-            )
-          ],
-        )
+        child: Card(
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: Theme.of(context).colorScheme.outline,
+            ),
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+          ),
+          child: SizedBox(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ContentHead(title: widget.contentData.title),
+                ContentBody(bodyText: widget.contentData.text),
+                ContentFoot(
+                    postId: widget.contentData.postId,
+                    contentId: widget.contentData.contentId,
+                    likeCnt: widget.contentData.likeCnt,
+                    liked: widget.contentData.liked
+                )
+              ],
+            ),
+          ),
+        ),
     );
   }
 

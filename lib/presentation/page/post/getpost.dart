@@ -2,6 +2,7 @@ import 'package:client/config/theme.dart';
 import 'package:client/domain/post.dart';
 import 'package:client/presentation/widget/appbar/appbar.dart';
 import 'package:client/presentation/widget/content/content.dart';
+import 'package:client/presentation/widget/content/contents.dart';
 import 'package:client/service/post.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -45,16 +46,44 @@ class PostState extends State<GetPost> {
             future: futurePost,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return PageView(
-                  controller: controller,
-                  children: <Widget>[
-                    Center(
-                      child: Content(contentData: snapshot.data!.content1),
-                    ),
-                    Center(
-                      child: Content(contentData: snapshot.data!.content2)
-                    )
-                  ],
+                return Card(
+                  margin: const EdgeInsets.only(left: 50.0, right: 50.0, top: 50.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: SizedBox(
+                              height: 200,
+                              child: ListTile(
+                                title: Text(
+                                  snapshot.data!.title,
+                                  style: TextStyle(
+                                    fontSize: 40.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                subtitle: Text("viewCount 1"),
+                              ),
+                            )
+                          )
+                          ,
+                          Text(snapshot.data!.ownerUsername)
+                        ],
+                      ),
+                      Expanded(
+                        child: SizedBox(
+                          height: 500,
+                          child: Contents(
+                            contents: [
+                              Content(contentData: snapshot.data!.content1),
+                              Content(contentData: snapshot.data!.content2),
+                            ],
+                          )
+                        )
+                      )
+                    ],
+                  ),
                 );
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
