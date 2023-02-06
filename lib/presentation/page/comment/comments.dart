@@ -1,6 +1,7 @@
 import 'package:client/config/theme.dart';
 import 'package:client/presentation/widget/appbar/appbar.dart';
 import 'package:client/presentation/widget/comment/comment.dart';
+import 'package:client/presentation/widget/comment/leavecomment.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -54,6 +55,7 @@ class CommentsPageState extends State<CommentsPage> {
                   commentText: "Specifying an itemExtent or an prototypeItem is more efficient than letting the children determine their own extent because the scrolling machinery can make use of the foreknowledge of the children's extent to save work, for example when the scroll position changes drastically.",
                   createdAgo: "4 Hour Ago",
                 ),
+                LeaveCommentWidget(),
               ],
             ),
           ),
