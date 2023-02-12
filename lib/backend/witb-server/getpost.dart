@@ -34,6 +34,7 @@ class GetPostResponse {
   final String id;
   final String ownerUsername;
   final String title;
+  final String viewCount;
   final GetPostContentResponse content1;
   final GetPostContentResponse content2;
   final int createdAt;
@@ -44,6 +45,7 @@ class GetPostResponse {
     required this.id,
     required this.ownerUsername,
     required this.title,
+    required this.viewCount,
     required this.content1,
     required this.content2,
     required this.createdAt,
@@ -57,6 +59,7 @@ class GetPostResponse {
       id: postId,
       ownerUsername: json['ownerUsername'],
       title: json['title'],
+      viewCount: json['viewCount'],
       content1: GetPostContentResponse(
         postId: postId,
         contentId: json['content1Id'],
@@ -82,6 +85,7 @@ class GetPostResponse {
       id: id,
       ownerUsername: ownerUsername,
       title: title,
+      viewCount: viewCount,
       content1: ContentData(
         postId: id,
         contentId: content1.contentId,

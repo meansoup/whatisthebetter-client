@@ -63,7 +63,7 @@ class PostState extends State<GetPost> {
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                subtitle: Text("viewCount 1"),
+                                subtitle: Text("viewCount " + snapshot.data!.viewCount),
                               ),
                             )
                           )
