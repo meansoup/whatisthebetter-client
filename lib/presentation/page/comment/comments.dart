@@ -21,6 +21,7 @@ class CommentsPage extends StatefulWidget {
 
 class CommentsPageState extends State<CommentsPage> {
   late PageController controller;
+  late List<Widget> list;
 
   @override
   void initState() {
@@ -28,11 +29,29 @@ class CommentsPageState extends State<CommentsPage> {
     controller = PageController(
       initialPage: 0,
     );
+    list = <Widget>[];
+
+    list.add(
+      CommentWidget(
+        commentId: "123",
+        commentOwner: "meansoup",
+        commentText: "ListTile must be wrapped in a Material widget to animate tileColor, selectedTileColor, focusColor, and hoverColor as these colors are not drawn by the list tile itself but by the material widget ancestor.",
+        createdAgo: "7 Hour Ago",
+      ),
+    );
+
+    list.add(
+      CommentWidget(
+        commentId: "456",
+        commentOwner: "meansoup",
+        commentText: "Specifying an itemExtent or an prototypeItem is more efficient than letting the children determine their own extent because the scrolling machinery can make use of the foreknowledge of the children's extent to save work, for example when the scroll position changes drastically.",
+        createdAgo: "4 Hour Ago",
+      )
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
         theme: mainTheme,
         darkTheme: mainDarkTheme,
@@ -40,28 +59,38 @@ class CommentsPageState extends State<CommentsPage> {
         home: Scaffold(
           appBar: WitbAppbar(),
           body: Center(
-            child: ListView(
-              padding: const EdgeInsets.all(8),
-              children: <Widget>[
-                CommentWidget(
-                  commentId: "123",
-                  commentOwner: "meansoup",
-                  commentText: "ListTile must be wrapped in a Material widget to animate tileColor, selectedTileColor, focusColor, and hoverColor as these colors are not drawn by the list tile itself but by the material widget ancestor.",
-                  createdAgo: "7 Hour Ago",
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: list.length,
+                    itemBuilder: (context, index) {
+                      return list[index];
+                    }
+                  )
                 ),
-                CommentWidget(
-                  commentId: "456",
-                  commentOwner: "meansoup",
-                  commentText: "Specifying an itemExtent or an prototypeItem is more efficient than letting the children determine their own extent because the scrolling machinery can make use of the foreknowledge of the children's extent to save work, for example when the scroll position changes drastically.",
-                  createdAgo: "4 Hour Ago",
+                Expanded(
+                  child: LeaveCommentWidget(
+                    postId: widget.postId,
+                    contentId: widget.contentId,
+                    comments: list,
+                    addComments: addCommentToList
+                  )
                 ),
-                LeaveCommentWidget(),
               ],
             ),
           ),
         )
     );
   }
+
+  void addCommentToList(CommentWidget comment) {
+    setState(() {
+      list.add(comment);
+    });
+  }
+
 }
 
 class AppScrollBehavior extends MaterialScrollBehavior {
