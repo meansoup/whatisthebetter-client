@@ -1,3 +1,4 @@
+import 'package:client/presentation/page/comment/comments.dart';
 import 'package:client/presentation/page/home.dart';
 import 'package:client/presentation/page/post/createpost.dart';
 import 'package:client/presentation/page/post/getpost.dart';
@@ -22,6 +23,23 @@ class MyApp extends StatelessWidget {
       },
       onGenerateRoute: (settings) {
         if (settings.name!.startsWith('/post')) {
+          // /post/{postId}/content/{contentId}/comment
+          if (settings.name!.endsWith('/comment')) {
+            List<String> tokens = settings.name!.split('/post/');
+            var postId = tokens.elementAt(1).split('/').elementAt(1);
+
+            tokens = settings.name!.split('/content/');
+            var contentId = tokens.elementAt(1).split('/').elementAt(1);
+
+            return MaterialPageRoute(
+              settings: settings,
+              builder: (context) {
+                return CommentsPage(postId: postId, contentId: contentId);
+              }
+            );
+          }
+
+          // /post/{postId}
           List<String> tokens = settings.name!.split('/post/');
           var postId = tokens.elementAt(1);
           return MaterialPageRoute(
