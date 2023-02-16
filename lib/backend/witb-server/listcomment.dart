@@ -24,20 +24,41 @@ Future<List<Comment>> listComments(String? witbToken, String postId, String cont
 
   if (response.statusCode == 200) {
     print(response.body);
-    var commentsResponse = parseComments(jsonDecode(response.body));
-    var comments = commentsResponse.map((c) => c.toComment()).toList();
+    var commentsResponse = CommentsResponse.fromJson(jsonDecode(response.body));
+    var comments = commentsResponse.comments.map((c) => c.toComment()).toList();
 
     return comments;
   } else {
+    print(response.statusCode);
+    print(response.body);
     throw Exception('Failed to load comment');
   }
 }
 
 String listCommentsUrl(String postId, String contentId, String? listingPoint) {
   if (listingPoint != null) {
-    return 'https://06g3yu62c2.execute-api.ap-northeast-2.amazonaws.com/v1/comment/lists?postId=' + postId + '&contentId=' + contentId + '&listingPoint=' + listingPoint;
+    return 'https://06g3yu62c2.execute-api.ap-northeast-2.amazonaws.com/v1/post/' + postId + '/content/' + contentId + '/comments/&listingPoint=' + listingPoint;
   }
-  return 'https://06g3yu62c2.execute-api.ap-northeast-2.amazonaws.com/v1/comment/lists?postId=' + postId + '&contentId=' + contentId;
+  return 'https://06g3yu62c2.execute-api.ap-northeast-2.amazonaws.com/v1/post/' + postId + '/content/' + contentId + '/comments';
+}
+
+class CommentsResponse {
+  final List<CommentResponse> comments;
+  final String listingPoint;
+
+  const CommentsResponse({
+    required this.comments,
+    required this.listingPoint,
+  });
+
+  factory CommentsResponse.fromJson(Map<String, dynamic> json) {
+    List<dynamic> comments = json['comments'];
+
+    return CommentsResponse(
+      comments: comments.map((json) => CommentResponse.fromJson(json)).toList(),
+      listingPoint: json['listingPoint'],
+    );
+  }
 }
 
 class CommentResponse {
@@ -55,7 +76,7 @@ class CommentResponse {
 
   factory CommentResponse.fromJson(Map<String, dynamic> json) {
     return CommentResponse(
-        commentId: json['commentId'],
+        commentId: json['id'],
         uid: json['uid'],
         text: json['text'],
         createdAt: json['createdAt'],
@@ -65,8 +86,4 @@ class CommentResponse {
   Comment toComment() {
     return Comment(commentId: commentId, uid: uid, text: text, createdAt: createdAt);
   }
-}
-
-List<CommentResponse> parseComments(List<dynamic> jsonList) {
-  return jsonList.map((json) => CommentResponse.fromJson(json)).toList();
 }
