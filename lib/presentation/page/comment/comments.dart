@@ -2,6 +2,7 @@ import 'package:client/config/theme.dart';
 import 'package:client/presentation/widget/appbar/appbar.dart';
 import 'package:client/presentation/widget/comment/comment.dart';
 import 'package:client/presentation/widget/comment/leavecomment.dart';
+import 'package:client/service/comment.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -48,6 +49,18 @@ class CommentsPageState extends State<CommentsPage> {
         createdAgo: "4 Hour Ago",
       )
     );
+
+    listCommentsWithCheckLogin(widget.postId, widget.contentId, null).then((comments) {
+      for (var comment in comments) {
+        var commentWidget = CommentWidget(
+          commentId: comment.commentId,
+          commentOwner: comment.uid,
+          commentText: comment.text,
+          createdAgo: comment.createdAt.toString(),
+        );
+        addComments(commentWidget);
+      }
+    });
   }
 
   @override
@@ -75,7 +88,7 @@ class CommentsPageState extends State<CommentsPage> {
                     postId: widget.postId,
                     contentId: widget.contentId,
                     comments: list,
-                    addComments: addCommentToList
+                    addComments: addComments
                   )
                 ),
               ],
@@ -85,7 +98,7 @@ class CommentsPageState extends State<CommentsPage> {
     );
   }
 
-  void addCommentToList(CommentWidget comment) {
+  void addComments(CommentWidget comment) {
     setState(() {
       list.add(comment);
     });
