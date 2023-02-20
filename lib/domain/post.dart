@@ -7,8 +7,7 @@ class PostData {
   final String viewCount;
   final ContentData content1;
   final ContentData content2;
-  final int createdAt;
-  final int modifiedAt;
+  final String createdAgo;
 
   const PostData({
     required this.id,
@@ -17,7 +16,6 @@ class PostData {
     required this.viewCount,
     required this.content1,
     required this.content2,
-    required this.createdAt,
-    required this.modifiedAt,
+    required this.createdAgo,
   });
 }
