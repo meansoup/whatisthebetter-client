@@ -14,6 +14,8 @@ var mainTheme = FlexThemeData.light(
     bottomSheetElevation: 17.0,
     bottomSheetModalElevation: 17.0,
   ),
+  useMaterial3: true,
+  swapLegacyOnMaterial3: true,
   visualDensity: FlexColorScheme.comfortablePlatformDensity,
 );
 
@@ -26,5 +28,7 @@ var mainDarkTheme = FlexThemeData.dark(
     bottomSheetElevation: 17.0,
     bottomSheetModalElevation: 17.0,
   ),
+  useMaterial3: true,
+  swapLegacyOnMaterial3: true,
   visualDensity: FlexColorScheme.comfortablePlatformDensity,
 );
