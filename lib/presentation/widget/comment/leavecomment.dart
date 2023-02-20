@@ -47,7 +47,7 @@ class LeaveCommentWidgetState extends State<LeaveCommentWidget> {
                   commentId: comment.commentId,
                   commentOwner: comment.uid,
                   commentText: comment.text,
-                  createdAgo: comment.createdAt.toString(),
+                  createdAgo: comment.createdAgo.toString(),
                 );
                 widget.addComments(commentWidget);
               });

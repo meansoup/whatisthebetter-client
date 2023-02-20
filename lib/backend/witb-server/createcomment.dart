@@ -52,14 +52,14 @@ class CreateCommentRequest {
 
 class CreateCommentResponse {
   final String commentId;
-  final int createdAt;
+  final String createdAgo;
 
   const CreateCommentResponse({
     required this.commentId,
-    required this.createdAt,
+    required this.createdAgo,
   });
 
   factory CreateCommentResponse.fromJson(Map<String, dynamic> json) {
-    return CreateCommentResponse(commentId: json['commentId'], createdAt: json['createdAt']);
+    return CreateCommentResponse(commentId: json['commentId'], createdAgo: json['createdAgo']);
   }
 }

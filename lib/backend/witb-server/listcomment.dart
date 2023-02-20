@@ -65,13 +65,13 @@ class CommentResponse {
   final String commentId;
   final String uid;
   final String text;
-  final int createdAt;
+  final String createdAgo;
 
   const CommentResponse({
     required this.commentId,
     required this.uid,
     required this.text,
-    required this.createdAt,
+    required this.createdAgo,
   });
 
   factory CommentResponse.fromJson(Map<String, dynamic> json) {
@@ -79,11 +79,11 @@ class CommentResponse {
         commentId: json['id'],
         uid: json['uid'],
         text: json['text'],
-        createdAt: json['createdAt'],
+        createdAgo: json['createdAgo'],
     );
   }
 
   Comment toComment() {
-    return Comment(commentId: commentId, uid: uid, text: text, createdAt: createdAt);
+    return Comment(commentId: commentId, uid: uid, text: text, createdAgo: createdAgo);
   }
 }
