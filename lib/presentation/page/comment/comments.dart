@@ -56,7 +56,7 @@ class CommentsPageState extends State<CommentsPage> {
           commentId: comment.commentId,
           commentOwner: comment.uid,
           commentText: comment.text,
-          createdAgo: comment.createdAt.toString(),
+          createdAgo: comment.createdAgo,
         );
         addComments(commentWidget);
       }

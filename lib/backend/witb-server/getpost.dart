@@ -37,8 +37,7 @@ class GetPostResponse {
   final String viewCount;
   final GetPostContentResponse content1;
   final GetPostContentResponse content2;
-  final int createdAt;
-  final int modifiedAt;
+  final String createdAgo;
   final String? likedContentId;
 
   const GetPostResponse({
@@ -48,8 +47,7 @@ class GetPostResponse {
     required this.viewCount,
     required this.content1,
     required this.content2,
-    required this.createdAt,
-    required this.modifiedAt,
+    required this.createdAgo,
     this.likedContentId,
   });
 
@@ -74,8 +72,7 @@ class GetPostResponse {
         text: json['content2Text'],
         likeCnt: json['content2LikeCnt'],
       ),
-      createdAt: json['createdAt'],
-      modifiedAt: json['modifiedAt'],
+      createdAgo: json['createdAgo'],
       likedContentId: json['likedContentId'],
     );
   }
@@ -102,8 +99,7 @@ class GetPostResponse {
         likeCnt: content2.likeCnt,
         liked: likedContentId == content2.contentId,
       ),
-      createdAt: createdAt,
-      modifiedAt: modifiedAt,
+      createdAgo: createdAgo,
     );
   }
 }

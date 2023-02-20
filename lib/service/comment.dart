@@ -19,7 +19,7 @@ Future<Comment> createCommentWithCheckLogin(String postId, String contentId, Str
       commentId: createCommentResponse.commentId,
       uid: "uid",
       text: text,
-      createdAt: createCommentResponse.createdAt
+      createdAgo: createCommentResponse.createdAgo
   );
 }
 
