@@ -30,7 +30,10 @@ class ContentHeadState extends State<ContentHead> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
-          child: Text(title)
+          child: Text(
+            title,
+            style: TextStyle(fontSize: 25),
+          ),
         )
       ],
     );
