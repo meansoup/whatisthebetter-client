@@ -7,6 +7,7 @@
 import 'dart:async';
 import 'dart:convert' show json;
 
+import 'package:client/service/login.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -14,20 +15,12 @@ import 'package:http/http.dart' as http;
 
 import 'sign_in_button.dart';
 
-/// The scopes required by this application.
 const List<String> scopes = <String>[
   'email',
   'https://www.googleapis.com/auth/contacts.readonly',
 ];
 
-GoogleSignIn _googleSignIn = GoogleSignIn(
-  clientId: '945034348783-i72l5ioka25q7al01fe79ve1rjqenuk6.apps.googleusercontent.com',
-  scopes: scopes,
-);
-
-/// The SignInDemo app.
 class SignInDemo extends StatefulWidget {
-  ///
   const SignInDemo({super.key});
 
   @override
@@ -35,52 +28,34 @@ class SignInDemo extends StatefulWidget {
 }
 
 class _SignInDemoState extends State<SignInDemo> {
-  GoogleSignInAccount? _currentUser;
   bool _isAuthorized = false; // has granted permissions?
   String _contactText = '';
-  String _idToken = '';
+  LoginWithGoogle loginWithGoogle = LoginWithGoogle();
 
   @override
   void initState() {
     super.initState();
+    loginWithGoogle.readyToSignIn();
 
-    _googleSignIn.onCurrentUserChanged
+    loginWithGoogle.googleSignIn.onCurrentUserChanged
         .listen((GoogleSignInAccount? account) async {
       // In mobile, being authenticated means being authorized...
       bool isAuthorized = account != null;
       // However, in the web...
       if (kIsWeb && account != null) {
-        isAuthorized = await _googleSignIn.canAccessScopes(scopes);
+        isAuthorized = await loginWithGoogle.googleSignIn.canAccessScopes(scopes);
       }
 
       setState(() {
-        _currentUser = account;
-        account?.authentication.then((value) => _idToken = value.idToken!);
         _isAuthorized = isAuthorized;
       });
 
-      // Now that we know that the user can access the required scopes, the app
-      // can call the REST API.
       if (isAuthorized) {
         _handleGetContact(account!);
-        // _getIdToken(account);
       }
     });
-
-    // In the web, _googleSignIn.signInSilently() triggers the One Tap UX.
-    //
-    // It is recommended by Google Identity Services to render both the One Tap UX
-    // and the Google Sign In button together to "reduce friction and improve
-    // sign-in rates" ([docs](https://developers.google.com/identity/gsi/web/guides/display-button#html)).
-    _googleSignIn.signInSilently();
   }
 
-  Future<void> _getIdToken(GoogleSignInAccount user) async {
-    var googleSignInAuthentication = await user.authentication;
-    setState(() {
-      _idToken = googleSignInAuthentication.idToken!;
-    });
-  }
 
   // Calls the People API REST endpoint for the signed-in user to retrieve information.
   Future<void> _handleGetContact(GoogleSignInAccount user) async {
@@ -138,7 +113,7 @@ class _SignInDemoState extends State<SignInDemo> {
   // SDK, so this method can be considered mobile only.
   Future<void> _handleSignIn() async {
     try {
-      await _googleSignIn.signIn();
+      await loginWithGoogle.googleSignIn.signIn();
     } catch (error) {
       print(error);
     }
@@ -151,19 +126,19 @@ class _SignInDemoState extends State<SignInDemo> {
   //
   // On the web, this must be called from an user interaction (button click).
   Future<void> _handleAuthorizeScopes() async {
-    final bool isAuthorized = await _googleSignIn.requestScopes(scopes);
+    final bool isAuthorized = await loginWithGoogle.googleSignIn.requestScopes(scopes);
     setState(() {
       _isAuthorized = isAuthorized;
     });
     if (isAuthorized) {
-      _handleGetContact(_currentUser!);
+      _handleGetContact(loginWithGoogle.googleSignIn.currentUser!);
     }
   }
 
-  Future<void> _handleSignOut() => _googleSignIn.disconnect();
+  Future<void> _handleSignOut() => loginWithGoogle.googleSignIn.disconnect();
 
   Widget _buildBody() {
-    final GoogleSignInAccount? user = _currentUser;
+    final GoogleSignInAccount? user = loginWithGoogle.googleSignIn.currentUser;
     if (user != null) {
       // The user is Authenticated
       return Column(

@@ -1,6 +1,15 @@
 import 'package:client/backend/sign/google.dart';
 import 'package:client/backend/witb-server/login.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+class LoginWithGoogle {
+  GoogleSignIn googleSignIn = generateGoogleSignIn();
+
+  Future<void> readyToSignIn() async {
+    googleSignIn.signInSilently();
+  }
+}
 
 Future<String> loginIfNotLoggedIn() async {
   final prefs = await SharedPreferences.getInstance();
@@ -11,10 +20,12 @@ Future<String> loginIfNotLoggedIn() async {
     return loggedInToken;
   }
 
-  var idToken = await signInGoogle();
+  var googleSignIn = await signInGoogle();
+  var authentication = await googleSignIn.currentUser?.authentication;
+  var idToken = authentication?.idToken;
   print("google id token: $idToken");
 
-  var witbToken = await login(LoginRequest(idToken: idToken, social: "GOOGLE"));
+  var witbToken = await login(LoginRequest(idToken: idToken!, social: "GOOGLE"));
   prefs.setString('witbToken', witbToken);
   return witbToken;
 }
