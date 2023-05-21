@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const Home(),
         '/post/create': (context) => const CreatePost(),
         '/login': (context) => const SignGoogle(),
-        '/google': (context) => const SignInDemo(),
+        '/google': (context) => const SignInGoogle(),
       },
       onGenerateRoute: (settings) {
         if (settings.name!.startsWith('/post')) {

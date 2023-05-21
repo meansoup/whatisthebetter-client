@@ -20,14 +20,14 @@ const List<String> scopes = <String>[
   'https://www.googleapis.com/auth/contacts.readonly',
 ];
 
-class SignInDemo extends StatefulWidget {
-  const SignInDemo({super.key});
+class SignInGoogle extends StatefulWidget {
+  const SignInGoogle({super.key});
 
   @override
-  State createState() => _SignInDemoState();
+  State createState() => _SignInGoogleState();
 }
 
-class _SignInDemoState extends State<SignInDemo> {
+class _SignInGoogleState extends State<SignInGoogle> {
   bool _isAuthorized = false; // has granted permissions?
   String _contactText = '';
   LoginWithGoogle loginWithGoogle = LoginWithGoogle();
