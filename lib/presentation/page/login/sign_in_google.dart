@@ -6,9 +6,10 @@
 
 import 'dart:async';
 import 'dart:convert' show json;
+import 'dart:developer';
 
+import 'package:client/presentation/page/login/join.dart';
 import 'package:client/service/login.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
@@ -39,20 +40,20 @@ class _SignInGoogleState extends State<SignInGoogle> {
 
     loginWithGoogle.googleSignIn.onCurrentUserChanged
         .listen((GoogleSignInAccount? account) async {
-      // In mobile, being authenticated means being authorized...
       bool isAuthorized = account != null;
-      // However, in the web...
-      if (kIsWeb && account != null) {
-        isAuthorized = await loginWithGoogle.googleSignIn.canAccessScopes(scopes);
-      }
 
       setState(() {
         _isAuthorized = isAuthorized;
-      });
 
-      if (isAuthorized) {
-        _handleGetContact(account!);
-      }
+        if (isAuthorized) {
+          _handleGetContact(account!);
+          log("!!!!! logged in");
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => JoinPage(email: account.email)),
+          );
+        }
+      });
     });
   }
 
