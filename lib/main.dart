@@ -1,5 +1,6 @@
 import 'package:client/presentation/page/comment/comments.dart';
 import 'package:client/presentation/page/home.dart';
+import 'package:client/presentation/page/login/sign_in_google.dart';
 import 'package:client/presentation/page/post/createpost.dart';
 import 'package:client/presentation/page/post/getpost.dart';
 import 'package:client/presentation/page/sign_google.dart';
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const Home(),
         '/post/create': (context) => const CreatePost(),
-        '/login': (contenxt) => const SignGoogle(),
+        '/login': (context) => const SignGoogle(),
+        '/google': (context) => const SignInGoogle(),
       },
       onGenerateRoute: (settings) {
         if (settings.name!.startsWith('/post')) {
