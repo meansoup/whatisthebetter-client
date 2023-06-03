@@ -8,6 +8,8 @@ import 'dart:async';
 import 'dart:convert' show json;
 import 'dart:developer';
 
+import 'package:client/backend/witb-server/exception.dart';
+import 'package:client/backend/witb-server/login.dart';
 import 'package:client/presentation/page/login/join.dart';
 import 'package:client/service/login.dart';
 import 'package:flutter/material.dart';
@@ -47,16 +49,26 @@ class _SignInGoogleState extends State<SignInGoogle> {
 
         if (isAuthorized) {
           _handleGetContact(account!);
-          log("!!!!! logged in");
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => JoinPage(email: account.email)),
+          log("!!!!! request logged in");
+          account.authentication.then(
+            (value) {
+              login(LoginRequest(idToken: value.idToken!, social: "GOOGLE")).then(
+                (value) => log("loggedIn token:" + value)
+              ).catchError((e) {
+                if (e is UserNotExistException) {
+                  log("!!!!! request logged in UserNotExistException");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => JoinPage(email: account.email)),
+                  );
+                }
+              });
+            }
           );
         }
       });
     });
   }
-
 
   // Calls the People API REST endpoint for the signed-in user to retrieve information.
   Future<void> _handleGetContact(GoogleSignInAccount user) async {
