@@ -1,7 +1,7 @@
 class ErrorResponse {
   final int code;
   final String msg;
-  final String stackTrace;
+  final String? stackTrace;
 
   const ErrorResponse({
     required this.code,
@@ -26,6 +26,15 @@ class ErrorResponse {
   }
 
   bool isUserNotExist() {
-    return code == 4040001;
+    return code == Constants.USER_NOT_EXIST;
   }
+
+  bool isUserAlreadyExist() {
+    return code == Constants.USER_ALREADY_EXIST;
+  }
+}
+
+class Constants {
+  static const int USER_NOT_EXIST = 4040001;
+  static const int USER_ALREADY_EXIST = 4090001;
 }
