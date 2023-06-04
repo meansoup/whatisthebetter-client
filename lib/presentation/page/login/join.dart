@@ -1,11 +1,15 @@
+import 'package:client/backend/witb-server/join.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class JoinPage extends StatefulWidget {
   final String email;
+  final String idToken;
 
   const JoinPage({
     super.key,
-    required this.email
+    required this.email,
+    required this.idToken,
   });
 
   @override
@@ -13,10 +17,18 @@ class JoinPage extends StatefulWidget {
 }
 
 class _JoinPageState extends State<JoinPage> {
+  String? nickname;
   String? birthDate;
   String? country;
   String? gender;
 
+  SharedPreferences? _prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    _initSharedPreferences();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +43,17 @@ class _JoinPageState extends State<JoinPage> {
           children: [
             Text(
               widget.email
+            ),
+            SizedBox(height: 16.0),
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: 'nickname',
+              ),
+              onChanged: (value) {
+                setState(() {
+                  nickname = value;
+                });
+              },
             ),
             SizedBox(height: 16.0),
             TextFormField(
@@ -73,6 +96,8 @@ class _JoinPageState extends State<JoinPage> {
                   print('Date of Birth: ${birthDate}');
                   print('Country: $country');
                   print('Gender: $gender');
+
+                  joinWithRequest();
                 } else {
                   print('Please fill in all fields');
                 }
@@ -83,5 +108,36 @@ class _JoinPageState extends State<JoinPage> {
         ),
       ),
     );
+  }
+
+  void joinWithRequest() {
+    List<String> yyyymmdd = birthDate!.split("-");
+    int year = int.parse(yyyymmdd[0]);
+    int month = int.parse(yyyymmdd[1]);
+    int day = int.parse(yyyymmdd[2]);
+
+    var birthDateRequest = JoinBirthDateRequest(
+      year: year,
+      month: month,
+      day: day,
+    );
+
+    var joinRequest = JoinRequest(
+      idToken: widget.idToken,
+      name: nickname!,
+      email: widget.email,
+      countryCode: country!,
+      sex: gender!,
+      birthDate: birthDateRequest,
+      social: "GOOGLE",
+    );
+
+    join(joinRequest).then((witbToken) {
+      _prefs?.setString('witbToken', witbToken);
+    });
+  }
+
+  Future<void> _initSharedPreferences() async {
+    _prefs = await SharedPreferences.getInstance();
   }
 }
