@@ -15,6 +15,7 @@ import 'package:client/service/login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'sign_in_button.dart';
 
@@ -34,10 +35,12 @@ class _SignInGoogleState extends State<SignInGoogle> {
   bool _isAuthorized = false; // has granted permissions?
   String _contactText = '';
   LoginWithGoogle loginWithGoogle = LoginWithGoogle();
+  SharedPreferences? _prefs;
 
   @override
   void initState() {
     super.initState();
+    _initSharedPreferences();
     loginWithGoogle.readyToSignIn();
 
     loginWithGoogle.googleSignIn.onCurrentUserChanged
@@ -52,14 +55,15 @@ class _SignInGoogleState extends State<SignInGoogle> {
           log("!!!!! request logged in");
           account.authentication.then(
             (value) {
-              login(LoginRequest(idToken: value.idToken!, social: "GOOGLE")).then(
-                (value) => log("loggedIn token:" + value)
-              ).catchError((e) {
+              login(LoginRequest(idToken: value.idToken!, social: "GOOGLE")).then((idToken) {
+                log("loggedIn token:" + idToken);
+                _prefs?.setString('witbToken', idToken);
+              }).catchError((e) {
                 if (e is UserNotExistException) {
                   log("!!!!! request logged in UserNotExistException");
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => JoinPage(email: account.email)),
+                    MaterialPageRoute(builder: (context) => JoinPage(email: account.email, idToken: value.idToken!)),
                   );
                 }
               });
@@ -68,6 +72,10 @@ class _SignInGoogleState extends State<SignInGoogle> {
         }
       });
     });
+  }
+
+  Future<void> _initSharedPreferences() async {
+    _prefs = await SharedPreferences.getInstance();
   }
 
   // Calls the People API REST endpoint for the signed-in user to retrieve information.

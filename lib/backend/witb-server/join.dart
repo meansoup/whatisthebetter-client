@@ -10,7 +10,7 @@ Future<String> join(JoinRequest JoinRequest) async {
   print("witb login responseBody:" + requestBody);
 
   final response = await http.post(
-    Uri.parse('https://06g3yu62c2.execute-api.ap-northeast-2.amazonaws.com/v1/login'),
+    Uri.parse('https://06g3yu62c2.execute-api.ap-northeast-2.amazonaws.com/v1/user'),
     body: jsonEncode(JoinRequest),
     headers: {
       "content-type" : "application/json",
@@ -18,7 +18,7 @@ Future<String> join(JoinRequest JoinRequest) async {
     }
   );
 
-  if (response.statusCode == 200) {
+  if (response.statusCode == 201) {
     var joinResponse = JoinResponse.fromJson(jsonDecode(response.body));
     print('witbToken = ${joinResponse.witbToken}');
     return joinResponse.witbToken;
