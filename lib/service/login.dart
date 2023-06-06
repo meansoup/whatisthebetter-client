@@ -1,5 +1,6 @@
 import 'package:client/backend/sign/google.dart';
 import 'package:client/backend/witb-server/login.dart';
+import 'package:client/service/service_exception.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,4 +34,14 @@ Future<String> loginIfNotLoggedIn() async {
 Future<String?> getTokenIfLoggedIn() async {
   final prefs = await SharedPreferences.getInstance();
   return prefs.getString('witbToken');
+}
+
+Future<String> getTokenThrowErrorIfNotLoggedIn() async {
+  final witbToken = await getTokenIfLoggedIn();
+
+  if (witbToken == null) {
+    throw NotLoggedInException();
+  }
+
+  return witbToken;
 }

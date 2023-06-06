@@ -10,7 +10,7 @@ Future<String> createPostWithCheckLogin(
     String content2Title, String content2Text
     ) async {
 
-  var witbToken = await loginIfNotLoggedIn();
+  var witbToken = await getTokenThrowErrorIfNotLoggedIn();
 
   var postId = await createPost(
     witbToken,
@@ -37,11 +37,11 @@ Future<PostData> getPostWithTokenIfLoggedIn(String postId) async {
 }
 
 Future<bool> likeContentWithCheckLogin(String postId, String contentId) async {
-  var witbToken = await loginIfNotLoggedIn();
+  var witbToken = await getTokenThrowErrorIfNotLoggedIn();
   return likeContent(witbToken, postId, contentId);
 }
 
 Future<bool> cancelLikeContentWithCheckLogin(String postId, String contentId) async {
-  var witbToken = await loginIfNotLoggedIn();
+  var witbToken = await getTokenThrowErrorIfNotLoggedIn();
   return cancelLikeContent(witbToken, postId, contentId);
 }
