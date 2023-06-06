@@ -1,3 +1,4 @@
+import 'package:client/presentation/page/login/to_sign_in.dart';
 import 'package:client/presentation/widget/appbar/appbar.dart';
 import 'package:client/service/post.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,10 @@ class CreatePost extends StatefulWidget {
 
 class CreatePostState extends State<CreatePost> {
 
+  @override
+  void initState() {
+    loginIfNotLoggedIn(context);
+  }
 
   @override
   Widget build(BuildContext context) {
