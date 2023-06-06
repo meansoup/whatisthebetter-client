@@ -1,19 +1,15 @@
 
 import 'package:client/presentation/page/login/sign_in_google.dart';
+import 'package:client/service/login.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> loginIfNotLoggedIn(BuildContext context) async {
-  final prefs = await SharedPreferences.getInstance();
+  var loggedInToken = await getTokenIfLoggedIn();
 
-  var loggedInToken = prefs.getString('witbToken') ?? "";
-
-  if (loggedInToken.isNotEmpty) {
-    return;
+  if (loggedInToken == null) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SignInGoogle()),
+    );
   }
-
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => SignInGoogle()),
-  );
 }
