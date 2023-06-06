@@ -3,7 +3,6 @@ import 'package:client/presentation/page/home.dart';
 import 'package:client/presentation/page/login/sign_in_google.dart';
 import 'package:client/presentation/page/post/createpost.dart';
 import 'package:client/presentation/page/post/getpost.dart';
-import 'package:client/presentation/page/sign_google.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,7 +19,6 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const Home(),
         '/post/create': (context) => const CreatePost(),
-        '/login': (context) => const SignGoogle(),
         '/google': (context) => const SignInGoogle(),
       },
       onGenerateRoute: (settings) {
