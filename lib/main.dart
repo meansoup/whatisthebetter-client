@@ -1,3 +1,4 @@
+import 'package:client/presentation/page/chart.dart';
 import 'package:client/presentation/page/comment/comments.dart';
 import 'package:client/presentation/page/home.dart';
 import 'package:client/presentation/page/login/sign_in_google.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const Home(),
         '/post/create': (context) => const CreatePost(),
         '/google': (context) => const SignInGoogle(),
+        '/chart': (context) => ChartSample(),
       },
       onGenerateRoute: (settings) {
         if (settings.name!.startsWith('/post')) {
