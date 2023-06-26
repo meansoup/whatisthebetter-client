@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:client/domain/likerate.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
 String baseUrl = 'https://06g3yu62c2.execute-api.ap-northeast-2.amazonaws.com';
 
-Future<CountryLikeRateResponse> countryLikeRate(String? witbToken, String postId) async {
+Future<LikeRates> countryLikeRate(String? witbToken, String postId) async {
   Response response;
   if (witbToken != null) {
     response = await http.get(
@@ -23,7 +24,8 @@ Future<CountryLikeRateResponse> countryLikeRate(String? witbToken, String postId
 
   if (response.statusCode == 200) {
     print(response.body);
-    return CountryLikeRateResponse.fromJson(jsonDecode(response.body));
+    var countryLikeRateResponse = CountryLikeRateResponse.fromJson(jsonDecode(response.body));
+    return countryLikeRateResponse.toEntity();
   } else {
     throw Exception('Failed to load album');
   }
@@ -50,5 +52,13 @@ class CountryLikeRateResponse {
       country: json['country'],
       likeRate: parsedLikeRate,
     );
+  }
+
+  LikeRates toEntity() {
+    List<LikeRate> likeRateList = [];
+    likeRate.forEach((key, value) {
+      likeRateList.add(LikeRate(key, value));
+    });
+    return LikeRates(likeRateList);
   }
 }
