@@ -1,8 +1,11 @@
 import 'package:client/config/theme.dart';
+import 'package:client/domain/likerate.dart';
 import 'package:client/domain/post.dart';
 import 'package:client/presentation/widget/appbar/appbar.dart';
 import 'package:client/presentation/widget/content/content.dart';
 import 'package:client/presentation/widget/content/contents.dart';
+import 'package:client/presentation/widget/likeratechart/like_rate_pie_chart.dart';
+import 'package:client/service/like_rate/like_rate.dart';
 import 'package:client/service/post.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +25,7 @@ class GetPost extends StatefulWidget {
 class PostState extends State<GetPost> {
   late Future<PostData> futurePost;
   late PageController controller;
+  LikeRates? likeRates = null;
 
   @override
   void initState() {
@@ -30,6 +34,12 @@ class PostState extends State<GetPost> {
     controller = PageController(
       initialPage: 0,
     );
+  }
+
+  void loadCountryLikeRate() {
+    setState(() {
+      countryLikeRateWithTokenIfLoggedIn(widget.postId).then((value) => this.likeRates = value);
+    });
   }
 
   @override
@@ -71,6 +81,10 @@ class PostState extends State<GetPost> {
                           Text(snapshot.data!.ownerUsername)
                         ],
                       ),
+                      ElevatedButton(
+                        onPressed: loadCountryLikeRate,
+                        child: Text('country rate'),
+                      ),
                       Expanded(
                         child: SizedBox(
                           height: 500,
@@ -81,7 +95,13 @@ class PostState extends State<GetPost> {
                             ],
                           )
                         )
-                      )
+                      ),
+                      Container(
+                        child: likeRates == null ? Container() : SizedBox(
+                          height: 200,
+                          child: LikeRatePieChartWidget(likeRates: likeRates!),
+                        ),
+                      ),
                     ],
                   ),
                 );
