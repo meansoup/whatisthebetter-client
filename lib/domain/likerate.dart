@@ -10,6 +10,7 @@ class LikeRates {
 
 class LikeRate {
   String fieldName;
+  String? fieldNickName;
   double rate;
 
   LikeRate(this.fieldName, this.rate);

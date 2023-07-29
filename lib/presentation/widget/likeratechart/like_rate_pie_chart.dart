@@ -64,7 +64,7 @@ class LikeRatePieChartWidgetState extends State<LikeRatePieChartWidget> {
       return PieChartSectionData(
         color: colors[i],
         value: widget.likeRates.likeRates[i].rate,
-        title: widget.likeRates.likeRates[i].fieldName + " (" + widget.likeRates.likeRates[i].rate.toString() + ")",
+        title: "${widget.likeRates.likeRates[i].fieldNickName} (${widget.likeRates.likeRates[i].rate})",
         radius: radius,
         titleStyle: TextStyle(
           fontSize: fontSize,
