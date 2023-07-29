@@ -36,9 +36,19 @@ class PostState extends State<GetPost> {
     );
   }
 
-  void loadCountryLikeRate() {
+  void loadCountryLikeRate() async {
+    var postData = await futurePost;
+    var likeRates = await countryLikeRateWithTokenIfLoggedIn(widget.postId);
+
+    for (var likeRate in likeRates.likeRates) {
+      var contentIdTitles = postData.contentIdTitles();
+      var title = contentIdTitles[likeRate.fieldName];
+      likeRate.fieldNickName = title;
+    }
+
+    this.likeRates = likeRates;
+
     setState(() {
-      countryLikeRateWithTokenIfLoggedIn(widget.postId).then((value) => this.likeRates = value);
     });
   }
 
