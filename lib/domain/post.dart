@@ -18,4 +18,11 @@ class PostData {
     required this.content2,
     required this.createdAgo,
   });
+
+  Map<String, String> contentIdTitles() {
+    return {
+      content1.contentId: content1.title,
+      content2.contentId: content2.title,
+    };
+  }
 }
